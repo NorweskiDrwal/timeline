@@ -1,48 +1,138 @@
-/* || general styles */
-
-html {
-    font-family: 'helvetica neue', helvetica, arial, sans-serif;
-  }
-  
-  body {
-    width: 800px;
-    margin: 0 auto;
-  }
-  
-  h1, h2 {
-    font-family: 'Faster One', cursive;
-  }
-  
-  /* header styles */
-  
-  h1 {
-    font-size: 4rem;
-    text-align: center;
-  }
-  
-  header p {
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  /* section styles */
-  
-  section article {
-    width: 33%;
-    float: left;
-  }
-  
-  section p {
-    margin: 5px 0;
-  }
-  
-  section ul {
-    margin-top: 0;
-  }
-  
-  h2 {
-    font-size: 2.5rem;
-    letter-spacing: -5px;
-    margin-bottom: 10px;
-  }
+body {
+  margin: 10em 5em;
+  font-family: Myriad Pro;
+}
+.timeline {
+  background: rgb(15, 15, 73);
+  display: block;
+  height: 1.2em;
+  border-radius: 8px;
+  width: 100%;
+  position: relative;
+  padding: .1em;
+}
+.timeline .line {
+  background: transparent;  
+  display: block;
+  list-style-type: none;
+  margin: 0.1em;  
+  padding: 0;  
+  height: 1em;
+  border-radius: 6px;
+  width: auto;
+  position: relative;
+}
+.timeline .line .events {
+  position: relative;
+  top: -0.77em;
+  margin: 0 0.5em;
+}
+.timeline .line .events .event,
+.timeline .line .events .past-event {
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 0;
+  margin: 0 0 0 -0.5em;
+}
+.timeline .line .events .event .circle,
+.timeline .line .events .past-event .circle {
+  position: relative;
+  background: #fff;
+  border: 4px solid #008000;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+.timeline .line .events .event .circle .circle-inner,
+.timeline .line .events .past-event .circle .circle-inner {
+  background: #fff;
+  width: 2.12em;
+  height: 2.11em;
+  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+}
+.timeline .line .events .event .label,
+.timeline .line .events .past-event .label {
+  display: none;
+  width: 10em;
+  font-size: 13px;
+  border: 3px solid #008000;
+  background: #fff;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  text-align: center;
+  -webkit-box-shadow: 0 2px 2px #fff;
+  box-shadow: 0 2px 2px #fff;
+  position: absolute;
+  margin: -2px 0 0 -6em;
+  left: 50%;
+  top: 50%;
+}
+.timeline .line .events .event .label label,
+.timeline .line .events .past-event .label label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+.timeline .line .events .event:hover .circle .circle-inner,
+.timeline .line .events .past-event:hover .circle .circle-inner {
+  z-index: 1010;
+}
+.timeline .line .events .event:hover .label,
+.timeline .line .events .past-event:hover .label {
+  display: block;
+  z-index: 1000;
+}
+.timeline .line.checklist {
+  border-color:rgb(15, 15, 73);
+}
+.timeline .line.checklist .events .event .circle,
+.timeline .line.checklist .events .past-event .circle {
+  border-color: rgb(15, 15, 73);
+}
+.timeline .line.checklist .events .event .circle .circle-inner {
+  background:  rgb(15, 15, 73);
+}
+.timeline .line.checklist .events .past-event .circle .circle-inner {
+  background-image: radial-gradient(farthest-corner at 5px 5px, yellow 10%, orange 100%);
+}
+.timeline .line.checklist .events .event .label {
+  border-color: rgb(15, 15, 73);
+}
+.timeline .time {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.timeline .time .period {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.timeline .time .period .label {
+  font-size: 11px;
+  height: 13px;
+  line-height: 13px;
+  color: #aaa;
+  margin: 3px;
+}
+.timeline .time .period .label.last {
+  float: right;
+}
+.timeline .time .period .label.first,
+.timeline .time .period .label.last {
+  color: #999;
+  font-size: 13px;
+}
+.timeline .time .period:nth-child(even) {
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-width: 0 1px;
+}

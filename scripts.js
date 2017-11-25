@@ -1,5 +1,5 @@
 
-    var section = document.querySelector('section');
+    var timeline = document.querySelector('#timeline');
     var requestURL = 'events.json';
     var request = new XMLHttpRequest();
     request.open('GET', requestURL);
@@ -7,28 +7,33 @@
     request.send();
     request.onload = function() {
       var superHeroes = request.response;
-
       showHeroes(superHeroes);
     }
 
     function showHeroes(jsonObj) {
-      var heroes = jsonObj['members'];
+      var heroes = jsonObj['events'];
       for(var i = 0; i < heroes.length; i++) {
-        var myArticle = document.createElement('article');
-        var myH2 = document.createElement('h2');
+        var eventListItem = document.createElement('li');
         var myPara1 = document.createElement('p');
         var myPara2 = document.createElement('p');
-        var myPara3 = document.createElement('p');
-        var myList = document.createElement('ul');
-        myH2.textContent = heroes[i].data;
-        myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
-        myPara2.textContent = 'Wydarzenie: ' + heroes[i].nazwa;
 
-        myArticle.appendChild(myH2);
-        myArticle.appendChild(myPara1);
-        myArticle.appendChild(myPara2);
-        myArticle.appendChild(myPara3);
-        myArticle.appendChild(myList);
-        section.appendChild(myArticle);
+        eventListItem.textContent = heroes[i].data;
+
+      //  var myDate = heroes[i].data.split(".");
+      //  var newDate = myDate[1] + "/" + myDate[0] + "/" + myDate[2];
+      //  var timestamp = new Date(newDate).getTime();
+
+      
+
+
+
+        myPara1.textContent = heroes[i].nazwa;
+        myPara2.textContent = heroes[i].ikona;
+
+        eventListItem.appendChild(myPara1);
+        eventListItem.appendChild(myPara2);
+        timeline.appendChild(eventListItem);
+
+
       }
     }
