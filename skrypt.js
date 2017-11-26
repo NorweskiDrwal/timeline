@@ -101,8 +101,8 @@ $(document).ready(function() {
 // -> this JS object stores data with events' details ---------------------------------------------------
 // ------------------------------------------------------------------------------------------------------    
     var table = {
-        data_start: 1510700400000, // 15.11.2017 timestamp
-        data_koniec: 1513292400000, // 15.12.2017 timestamp
+        data_start: 1511132400000, // 15.11.2017 timestamp
+        data_koniec: 1513724400000, // 15.12.2017 timestamp
         events: [
             {
                 id: 1,
@@ -118,20 +118,20 @@ $(document).ready(function() {
             },
             {
                 id: 3,
-                data: 1511996400000, // 30.11.2017 timestamp
+                data: 1512342000000, // 04.12.2017 timestamp
                 nazwa: 'Zaproszenie na rozmowę',
                 ikona: '<i class="fa fa-phone" aria-hidden="true"></i>'
             },
             {
                 id: 4,
-                data: 1512342000000, // 04.12.2017 timestamp
+                data: 1512687600000, // 08.12.2017 timestamp
                 nazwa: 'Rozmowa kwalifikacyjna',
                 ikona: '<i class="fa fa-weixin" aria-hidden="true"></i>'
             },
             {
                 id: 5,
-                data: 1512946800000, // 11.12.2017 timestamp
-                nazwa: 'Pierwszy dzień w pracy',
+                data: 1513551600000, // 18.12.2017 timestamp
+                nazwa: 'Pierwszy dzień w pracy...?',
                 ikona: '<i class="fa fa-handshake-o" aria-hidden="true"></i>'
             }
         ]
