@@ -23,6 +23,10 @@
         overflow: hidden;
     }
 
+    a #ext_version {
+        display: none;
+    }
+
     .timeline {
         transform: rotate(90deg);
         position: absolute;
