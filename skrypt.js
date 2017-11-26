@@ -1,141 +1,143 @@
 $(document).ready(function() {
     
-    $.fn.timeline = function(data) {                                                    // -> allows calling 'timeline' module to access 'table' object 
+    $.fn.timeline = function(data) {                                                    // -> allows callback of 'timeline' module to access 'table' object 
 
         return this.each(function() {
          
-            $to = $(this);                                                              // -> mniej pisania
-            $to.addClass('timeline');                                                   // -> dodaj klasę 'timeline' do 
+            $to = $(this);                                                              // -> less typing
 
-            var scale = 100/(table.data_koniec - table.data_start);                     // -> przelicza skale podzialki, zeby umiescic eventy we wlasciwej kolejnosci
-            var formatDaty = {year: 'numeric', month: 'numeric', day: 'numeric' };      // -> ustala format daty na DD.MM.RRRR
+            $to.addClass('timeline');                                                   // -> add '.timeline' class to '.timeline-target'
 
-            $.each(data.lines, function(i,line) {
+            var scale = 100/(table.data_koniec - table.data_start);                     // -> counts the ratio at which to devide the timeline
 
-                var lineTmpl = 
-                $(  '<div class="line">' +
-                        '<div class="events"></div>' +
-                    '</div>'
-                ).addClass("line " + line.css).appendTo($to);
-           
-                var myDate = new Date().toLocaleString('pl-PL',formatDaty);             // -> get today's date
-                myDate = myDate.split(".");                                             // -> create a string
-                var todayTimestamp = myDate[1] + "/" + myDate[0] + "/" + myDate[2];     // -> change a format
-                var today = new Date(todayTimestamp).getTime();                         // -> create a timestamp to place 'today' on the timeline
-                var todayPlace = ((today - table.data_start) * scale).toFixed(2);       // -> find the place on the timeline
-                var todayOnTimeline = 
-                /*$(  
-                    '<div class="event">' +
-                        '<div class="circle">' +
-                            '<div class="circle-inner"></div>' +
-                            '<div class="label">' +
-                                '<data>' + (new Date(today).toLocaleString('pl-PL',formatDaty)) + '</data>' +
-                                '<label>' + 'dzisiaj' + '</label>'+ 
+            var formatDaty = {year: 'numeric', month: 'numeric', day: 'numeric' };      // -> sets the date format to DD.MM.RRRR
+
+            var lineTmpl = $(                                                           // -> variable for an element consisting of two divs
+              '<div class="line">' +
+                    '<div class="events"></div>' +
+                '</div>'
+            ).addClass("line").appendTo($to);                                           // -> adds class '.line' as a child of 'timeline-target' to previously defined element
+    
+
+
+        // -> this module changes today's date to a timestamp ---------------------------------------------------
+        // ------------------------------------------------------------------------------------------------------
+            var myDate = new Date().toLocaleString('pl-PL',formatDaty);                 // -> get today's date
+
+            myDate = myDate.split(".");                                                 // -> create a string
+
+            var todayTimestamp = myDate[1] + "/" + myDate[0] + "/" + myDate[2];         // -> change a date format
+
+            var today = new Date(todayTimestamp).getTime();                             // -> create a timestamp to place 'today' on the timeline
+
+            var todayPlace = ((today - table.data_start) * scale).toFixed(2);           // -> find the place on the timeline based on the counted number (with two decimals) for 'today'
+        // ------------------------------------------------------------------------------------------------------
+
+
+
+        // -> this module adds HTML elements to a '.timeline' to place 'today' on a timeline --------------------
+        // ------------------------------------------------------------------------------------------------------
+            var todayOnTimeline = $(                                                    // -> variable for an element consisting of two divs
+                '<div class="event">' +
+                    '<div class="milestone-circle"></div>' +
+                    '<div class="milestone-label">' +
+                        '<data>' + (new Date(today).toLocaleString('pl-PL',formatDaty)) + '</data>' +   // -> converts timestamp of 'today' to a regular date in DD.MM.RRRR format
+                        '<label>' + ' (dzisiaj)' + '</label>' + 
+                    '</div>' +
+                    '</div>' +
+                '</div>'
+            ).appendTo($('.events', lineTmpl)).css('left', todayPlace + '%');           // -> adds HTML elements as children of '.events' to previously defined element
+            
+            $('.timeline .line').css({
+                'background-image':'linear-gradient(to right, yellow, orange ' + (todayPlace - 15) + '%' + ', #c61c3d ' + todayPlace + '%' + ', transparent 1%)'    // -> colors the background of '.line' up till today
+            }); 
+        // ------------------------------------------------------------------------------------------------------
+        
+
+
+        // -> this module adds HTML elements to a '.timeline' to create space for items from JS table -----------
+        // -> then checks if given dates are pre- or post- today and adds HTML elements to a '.timeline'---------
+        // ------------------------------------------------------------------------------------------------------
+            $.each(data.events, function(index, events) {                               // -> loop through 'events' array in JS object 'table' and assign parameter 'events' to access the array              
+
+                var eventPlace = ((events.data - table.data_start) * scale).toFixed(2); // -> find the place on the timeline based on the counted number (with two decimals) for events' dates
+
+                if (todayPlace >= eventPlace) {                                         // -> if event happened earlier than today 
+
+                    var eventTmpl = $(                      
+                        '<div class="past-event">' +
+                            '<div class="circle">' +
+                                '<div class="circle-inner">' + events.ikona + '</div>' +
+                                '<div class="label">' +
+                                    '<data>' + (new Date(events.data).toLocaleString('pl-PL',formatDaty)) + '</data>' +     // -> converts timestamp of events' dates to a regular date in DD.MM.RRRR format
+                                    '<label>' + events.nazwa + '</label>'+ 
+                                '</div>' +
                             '</div>' +
-                        '</div>' +
-                    '</div>'
-                ).appendTo($('.events', lineTmpl)).css('left', todayPlace + '%'); // -> adds 'today' event on the timeline
-                */
-                $('.timeline .line').css({'background-image':'linear-gradient(to right, yellow, orange ' + (todayPlace - 10) + '%' + ', #c61c3d ' + todayPlace + '%' + ', transparent 1%)'}); // -> colors the background up till today
+                        '</div>'
+                    ).appendTo($('.events', lineTmpl)).css('left', eventPlace + '%');   // positions element '.past-event' some % left from the document's left edge
+                    
+                } else {                                                                // -> if event happens after today
 
-                
-                $.each(line.events, function(index,event) {
-
-                    var eventPlace = ((event.data - table.data_start) * scale).toFixed(2);   
-
-                    if (todayPlace >= eventPlace) { // -> if event happened earlier than today
-
-                        var eventTmpl = 
-                        $(  
-                            '<div class="past-event">' +
-                                '<div class="circle">' +
-                                    '<div class="circle-inner"></div>' +
-                                    '<div class="label">' +
-                                        '<data>' + (new Date(event.data).toLocaleString('pl-PL',formatDaty)) + '</data>' +
-                                        '<label>' + event.nazwa + '</label>'+ 
-                                    '</div>' +
+                    var eventTmpl = $(                      
+                        '<div class="event">' +
+                            '<div class="circle">' +
+                                '<div class="circle-inner">' + events.ikona + '</div>' +
+                                '<div class="label">' +
+                                    '<data>' + (new Date(events.data).toLocaleString('pl-PL',formatDaty)) + '</data>' +     // -> converts timestamp of events' dates to a regular date in DD.MM.RRRR format
+                                    '<label>' + events.nazwa + '</label>'+ 
                                 '</div>' +
-                            '</div>'
-                        ).appendTo($('.events', lineTmpl)).css('left', eventPlace + '%');      
-                        alert('pokoloruj');
-                        
-                    } else {    // -> if event will happen after today
+                            '</div>' +
+                        '</div>'
+                    ).appendTo($('.events', lineTmpl)).css('left', eventPlace + '%');   // positions element '.past-event' some % left from the document's left edge 
 
-                        var eventTmpl = 
-                        $(  
-                            '<div class="event">' +
-                                '<div class="circle">' +
-                                    '<div class="circle-inner"></div>' +
-                                    '<div class="label">' +
-                                        '<data>' + (new Date(event.data).toLocaleString('pl-PL',formatDaty)) + '</data>' +
-                                        '<label>' + event.nazwa + '</label>'+ 
-                                    '</div>' +
-                                '</div>' +
-                            '</div>'
-                        ).appendTo($('.events', lineTmpl)).css('left', eventPlace + '%');     
-                        alert('zignoruj');
-                    }
-
-
-                });
+                }
 
             });
-   
-            var timeTmpl = $('<div class="time">').appendTo($to);
-
-            var periodTmpl = 
-            $(
-                '<div class="period">' +
-                    '<div class="label last">' + (new Date(table.data_koniec).toLocaleString('pl-PL',formatDaty)) + '</div>' +
-                    '<div class="label first">' + (new Date(table.data_start).toLocaleString('pl-PL',formatDaty)) + '</div>' +
-                '</div>'
-            ).css({left:"0%", width:"100%"}).appendTo(timeTmpl);
+        // ------------------------------------------------------------------------------------------------------
 
         });
     };
-   
+
+// -> this JS object stores data with events' details ---------------------------------------------------
+// ------------------------------------------------------------------------------------------------------    
     var table = {
-        data_start: 1510700400000, // 15.11.2017 - 1510700400000
-        data_koniec: 1513292400000, // 15.12.2017
-        lines: {
-            'checklists': {
-                css: 'checklist',
-                events: [
-                    {
-                        id: 1,
-                        data: 1511391600000, // 23.11.2017
-                        nazwa: 'Dostałem zadanie testowe',
-                        ikona: 'complete'
-                    },
-                    {
-                        id: 2,
-                        data: 1511737200000, // 27.11.2017
-                        nazwa: 'Odesłałem zadanie testowe',
-                        ikona: 'complete'
-                    },
-                    {
-                        id: 3,
-                        data: 1511996400000, // 30.11.2017
-                        nazwa: 'Vehicle',
-                        ikona: 'resolve'
-                    },
-                    {
-                        id: 4,
-                        data: 1512342000000, // 04.12.2017
-                        nazwa: 'Trailer Pickup',
-                        ikona: 'complete'
-                    },
-                    {
-                        id: 5,
-                        data: 1512946800000, // 11.12.2017
-                        nazwa: 'Danger situation',
-                        ikona: 'alert'
-                    }
-                ]
+        data_start: 1510700400000, // 15.11.2017 timestamp
+        data_koniec: 1513292400000, // 15.12.2017 timestamp
+        events: [
+            {
+                id: 1,
+                data: 1511391600000, // 23.11.2017 timestamp
+                nazwa: 'Zadanie testowe do zrobienia',
+                ikona: '<i class="fa fa-envelope" aria-hidden="true"></i>'
+            },
+            {
+                id: 2,
+                data: 1511650800000, // 26.11.2017 timestamp
+                nazwa: 'Zadanie testowe odesłane',
+                ikona: '<i class="fa fa-paper-plane" aria-hidden="true"></i>'
+            },
+            {
+                id: 3,
+                data: 1511996400000, // 30.11.2017 timestamp
+                nazwa: 'Zaproszenie na rozmowę',
+                ikona: '<i class="fa fa-phone" aria-hidden="true"></i>'
+            },
+            {
+                id: 4,
+                data: 1512342000000, // 04.12.2017 timestamp
+                nazwa: 'Rozmowa kwalifikacyjna',
+                ikona: '<i class="fa fa-weixin" aria-hidden="true"></i>'
+            },
+            {
+                id: 5,
+                data: 1512946800000, // 11.12.2017 timestamp
+                nazwa: 'Pierwszy dzień w pracy',
+                ikona: '<i class="fa fa-handshake-o" aria-hidden="true"></i>'
             }
-        }
+        ]
     };
-    
-    $('.tl').timeline(table);
+// ------------------------------------------------------------------------------------------------------
+
+    $('.timeline-target').timeline(table);                                          // -> callback with 'table' object to a module created with jQ prototype $.fn.timeline = function(data) {}
 
 });
