@@ -1,0 +1,414 @@
+body {
+  margin: 10em;
+  font-family: 'Lato', sans-serif;
+  background: #eee;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.modal {
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  transition: background .3s ease;
+}
+.darken {
+  background: rgba(15,15,73,0.5);
+  z-index: 220;
+}
+
+/* ---------------------------- STYLES CONTROLS ---------------------------- */
+.menu {
+  height: auto; width: auto;
+  position: absolute; top: 10px; right: 10px;
+  z-index: 230;  
+}
+
+.addEvent {
+  background-image: radial-gradient(farthest-corner at 5px 5px, yellow 10%, orange 40%, #c61c3d 100%);
+  border: 3px solid rgb(15, 15, 73);
+  border-radius: 50%;
+  color: rgb(15, 15, 73);
+  cursor: pointer;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px; width: 40px;
+  transition: all .3s ease;
+  z-index: 20;
+  -webkit-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  -ms-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+}
+.addEvent:hover {
+  background-image: radial-gradient(farthest-corner at 5px 5px,#c61c3d 0%, orange 60%, yellow 100%);
+}
+
+.scaleUp {
+  transform: scale(1.5);
+  margin-top: 10px;
+  margin-right:10px;  
+}
+
+.eventForm {
+  background: rgb(238, 236, 232);
+  border: 3px solid rgb(15, 15, 73);
+  border-radius: 10px;
+  color: #666;
+  height: auto; width: 270px;
+  overflow: hidden;
+  padding: 2px;
+  position: absolute; top: -110px; right: 80px;
+  transition: top .3s ease;
+  z-index: 230;
+
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  -ms-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.51);
+}
+
+.icons-box {
+  background: rgb(238, 236, 232);
+  border: 3px solid rgb(15, 15, 73);
+  border-radius: 10px;
+  color: rgb(15, 15, 73);
+  display: none;
+  font-size: 30px;
+  height: auto; width: 270px;
+  overflow: hidden;
+  padding: 2px;
+  position: absolute; top: 65px; right: 80px;
+  transition: top .3s ease;
+  z-index: 230;
+
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  -ms-box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 13px 2px rgba(255,255,255,0.51);
+}
+.icons-box i {
+  cursor: pointer;
+  padding: 4px;
+}
+.icons-box i:hover {
+  color: #c61c3d;
+}
+
+.show {
+  display: block;
+}
+
+.slideDown {
+  top: 0px;
+}
+
+.eventForm form {
+  position: relative;
+}
+
+.eventForm form input {
+  border: 1px solid #666;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  margin: 0 3px 3px 3px;
+}
+.eventForm form input[type=text] {
+  width: 94%;
+  margin: 3px;
+  padding: 0 3px;
+}
+input[type=date] {
+  font-family: 'Lato', sans-serif;
+  width: 45%;
+}
+
+#addBtn, #ikona {
+  background: orange;
+  border: 1px solid #666;
+  border-radius: 4px;
+  color: rgb(15, 15, 73);
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  width: auto;
+}
+#addBtn:hover, #ikona:hover {
+  background-image: radial-gradient(farthest-corner at 5px 5px, orange 30%, yellow 100%);  
+}
+.event-list {
+  list-style: none;
+  padding: 0; margin: 0 7px;
+  position: absolute; top: 80px; right: -50px;
+  z-index: 230;
+  transition: right .3s ease;   
+}
+.past-list-el, .list-el {
+  background-image: radial-gradient(farthest-corner at 5px 5px, yellow 10%, orange 40%, #c61c3d 100%);
+  border: 3px solid rgb(15, 15, 73);
+  border-radius: 50%;
+  height: 32px; width: 32px;
+  margin: 3px; 
+  -webkit-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  -ms-box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 12px 2px rgba(255,255,255,0.5);
+}
+.list-el {
+  background: rgb(15, 15, 73);
+  color: #fff;
+}
+.past-list-el:hover {
+  background-image: radial-gradient(farthest-corner at 5px 5px,#c61c3d 0%, orange 60%, yellow 100%);
+}
+.list-el:hover {
+  background-image: radial-gradient(farthest-corner at 0px 0px, #78cdad 10%, #134933 100%);  
+}
+.past-list-el i, .list-el i {
+  display:inline-block;
+  font-size: 20px;
+  line-height: 30px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  vertical-align: bottom;  
+}
+
+
+#clearLS {
+  background-image: radial-gradient(#c61c3d 30%, yellow 100%);
+  border: 3px solid orange;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 23px;
+  height: 38px; width: 38px;
+  margin: 3px; 
+  transition: all .3s ease;
+}
+#clearLS:hover {
+  background-image: radial-gradient(yellow 20%, #c61c3d 100%);
+  border: 3px solid #c61c3d;
+  cursor: pointer;
+}
+
+.aside label {
+  font-size: 10px;
+  position: absolute;
+  right: 300px;
+}
+
+.slideLeft {
+  right: 10px;
+  line-height: 10px;
+}
+
+
+.open {
+  background: pink;
+  border-radius: 8px;
+  height: 250px; width: 200px;
+  overflow: hidden;
+  position: absolute; top: 60px; right: 20px;  
+}
+
+
+/* -------------------------- STYLES THE TIMELINE -------------------------- */
+.timeline {
+  background: rgb(15, 15, 73);
+  border-radius: 8px;
+  display: block;
+  height: 1.2em;
+  padding: .1em;
+  position: relative;
+  width: 100%;
+  -webkit-box-shadow: 3px 3px 14px 3px rgba(102,96,102,1);
+  -moz-box-shadow: 3px 3px 14px 3px rgba(102,96,102,1);
+  -ms-box-shadow: 3px 3px 14px 3px rgba(102,96,102,1);
+  box-shadow: 3px 3px 14px 3px rgba(102,96,102,1);
+}
+.timeline .line {
+  background: transparent;  
+  display: block;
+  list-style-type: none;
+  margin: 0.1em;  
+  padding: 0;  
+  height: 1em;
+  border-radius: 6px;
+  width: auto;
+  position: relative;
+}
+.timeline .line .events {
+  position: relative;
+  top: -0.77em;
+  margin: 0 0.5em;
+}
+.timeline .line .events .event,
+.timeline .line .events .past-event {
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 0;
+  margin: 0 0 0 -0.5em;
+}
+.timeline .line .events .event .circle,
+.timeline .line .events .past-event .circle {
+  position: relative;
+  border: 4px solid #fff;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 12px 2px rgba(102,96,102,1);
+  -moz-box-shadow: 0px 0px 12px 2px rgba(102,96,102,1);
+  -ms-box-shadow: 0px 0px 12px 2px rgba(102,96,102,1);
+  box-shadow: 0px 0px 12px 2px rgba(102,96,102,1);
+}
+.timeline .line .events .event .circle .circle-inner,
+.timeline .line .events .past-event .circle .circle-inner {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.timeline .line .events .event .milestone-circle {
+  cursor: pointer;
+  position: relative;
+  width: 1em;
+  height: 2em;
+  border-radius: 50%;
+}
+.timeline .line .events .event .milestone-label {
+  border-radius: 3px;
+  display: none;
+  width: 160px;
+  color: rgb(15, 15, 73);
+  font-size: 16px;
+  border: 2px solid rgb(15, 15, 73);
+  text-align: center;
+  position: absolute;
+  margin-left: -85px;
+  left: 50%;
+  top: 300%;
+  padding: 6px 5px 3px 5px;
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  -moz-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  -ms-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+}
+.timeline .line .events .event:hover .milestone-label {
+  display: block;
+  z-index: 1000;
+}
+.timeline .line .events .event .milestone-label::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -12px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent rgb(15, 15, 73) transparent;
+}
+
+/* EDITS ICONS */
+.timeline .line .events .event .circle .circle-inner i,
+.timeline .line .events .past-event .circle .circle-inner i {
+  color: rgb(255, 255, 255);
+  display:inline-block;
+  font-size: 20px;
+  line-height: 30px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  vertical-align: bottom;
+}
+.timeline .line .events .past-event .circle .circle-inner i {
+  color: rgb(15, 15, 73);
+}
+.timeline .line .events .event .label,
+.timeline .line .events .past-event .label {
+  display: none;
+  width: 160px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 2px solid rgb(15, 15, 73);
+  background: #fff;
+  text-align: center;
+  position: absolute;
+  margin-left: -85px;
+  left: 50%;
+  bottom: 150%;
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  -moz-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  -ms-box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+  box-shadow: 0px 0px 13px 2px rgba(102,96,102,1);
+}
+.timeline .line .events .event .label::after,
+.timeline .line .events .past-event .label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: rgb(15, 15, 73) transparent transparent transparent;
+}
+
+.timeline .line .events .event .label data,
+.timeline .line .events .past-event .label data {
+  border-bottom: 2px solid rgb(15, 15, 73);
+  padding: 8px 5px 5px 5px;
+  display: block;
+  color: #000;
+  font-weight: bold;
+}
+
+.timeline .line .events .event .label label,
+.timeline .line .events .past-event .label label {
+  display: block;
+  font-size: 15px;
+  margin: 10px 5px 7px 5px;
+  color: #666;
+  text-transform: uppercase;
+}
+.timeline .line .events .event:hover .circle,
+.timeline .line .events .past-event:hover .circle {
+  cursor: pointer;
+  z-index: 210;
+}
+
+.timeline .line .events .event:hover .circle .circle-inner {
+  background-image: radial-gradient(farthest-corner at 0px 0px, #78cdad 10%, #134933 100%);
+}
+.timeline .line .events .past-event:hover .circle .circle-inner {
+  background-image: radial-gradient(farthest-corner at 5px 5px,#c61c3d 0%, orange 60%, yellow 100%);
+}
+.timeline .line .events .event:hover .label,
+.timeline .line .events .past-event:hover .label {
+  display: block;
+  z-index: 200;
+}
+.timeline .line {
+  border-color:rgb(15, 15, 73);
+}
+.timeline .line .events .event .circle,
+.timeline .line .events .past-event .circle {
+  background:  rgb(15, 15, 73);
+  border-color: rgb(15, 15, 73); 
+}
+.timeline .line .events .event .circle .circle-inner {
+  background:  rgb(15, 15, 73);
+}
+.timeline .line .events .past-event .circle .circle-inner {
+  background-image: radial-gradient(farthest-corner at 5px 5px, yellow 10%, orange 60%, #c61c3d 100%);
+}
+.timeline .line .events .event .label {
+  border-color:rgb(15, 15, 73);
+}
+
+
+
+
