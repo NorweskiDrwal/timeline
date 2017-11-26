@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Timeline</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="ext_style.css">
+  <link rel="stylesheet" type="text/css" href="ext_style-m.css">
+</head>
+
+<body class="">
+
+  <div class="modal"></div>
+
+  <aside class="menu">
+    <button class="addEvent" title="Dodaj nowe wydarzenie">+</button>
+    <div class="eventForm">
+      <form id="event-form">
+        <input type="text" name="nazwa" placeholder="nazwa wydarzenia" title="Wpisz tutaj nazwę wydarzenia"/>
+        <input id="date" name="data" type="date" title="Wybierz datę wydarzenia"/>
+        <button class="formBtn" id="ikona" title="Wybierz ikonkę, którą chcesz dodać do wydarzenia na osi czasu">IKONA</button>
+        <button class="formBtn" id="addBtn" title="Dodaj wydarzenie do osi czasu">DODAJ</button>
+      </form>
+    </div>
+    <div class="icons-box">
+        <i class="fa fa-glass"></i><i class="fa fa-youtube-square"></i><i class="fa fa-camera"></i>
+        <i class="fa fa-music"></i><i class="fa fa-heart"></i><i class="fa fa-road"></i>
+        <i class="fa fa-search"></i><i class="fa fa-user"></i><i class="fa fa-facebook-square"></i>
+        <i class="fa fa-archive"></i><i class="fa fa-power-off"></i><i class="fa fa-cog"></i>
+        <i class="fa fa-female"></i><i class="fa fa-linux"></i><i class="fa fa-arrow-left"></i>
+    </div>
+  </aside>
+
+  <aside>
+    <ul class="event-list">
+      <li class="past-list-el item" title="Kliknij ikonkę kosza, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij tę ikonkę do kosza, aby usunąć pojedyncze wydarzenie"><i class='fa fa-envelope' aria-hidden='true'></i></li>
+      <li class="past-list-el item" title="Kliknij ikonkę kosza, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij tę ikonkę do kosza, aby usunąć pojedyncze wydarzenie"><i class='fa fa-paper-plane' aria-hidden='true'></i></li>
+      <li class="list-el item" title="Kliknij ikonkę kosza, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij tę ikonkę do kosza, aby usunąć pojedyncze wydarzenie"><i class='fa fa-phone' aria-hidden='true'></i></li>
+      <li class="list-el item" title="Kliknij ikonkę kosza, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij tę ikonkę do kosza, aby usunąć pojedyncze wydarzenie"><i class='fa fa-weixin' aria-hidden='true'></i></li>
+      <li class="list-el item" title="Kliknij ikonkę kosza, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij tę ikonkę do kosza, aby usunąć pojedyncze wydarzenie"><i class='fa fa-handshake-o' aria-hidden='true'></i></li>
+      <button id="clearLS" title="Kliknij, aby usunąć wszystkie wydarzenia z osi czasu, lub przeciagnij ikonkę do kosza, aby usunąć pojedynczo"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </ul>
+  </aside>
+
+
+  <div class="timeline-target"></div>
+
+  <script src="ext_skrypt.js"></script>
+
+</body>
+
+</html>
+
+<!--
+var table = (function() {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "events.json",
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})();
+
+(new Date(parseInt(events.data, 10)).toLocaleString('pl-PL',formatDaty))
+-->
+
