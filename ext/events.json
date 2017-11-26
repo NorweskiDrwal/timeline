@@ -1,0 +1,31 @@
+{ 
+  "data_start": "1511132400000", 
+  "data_koniec": "1513724400000", 
+  "events": [
+    {
+        "data": "1511391600000", 
+        "nazwa": "Zadanie testowe do zrobienia",
+        "ikona": "<i class='fa fa-envelope' aria-hidden='true'></i>"
+    },
+    {
+        "data": "1511650800000", 
+        "nazwa": "Zadanie testowe odesłane",
+        "ikona": "<i class='fa fa-paper-plane' aria-hidden='true'></i>"
+    },
+    {
+        "data": "1512342000000",
+        "nazwa": "Zaproszenie na rozmowę", 
+        "ikona": "<i class='fa fa-phone' aria-hidden='true'></i>"
+    },
+    {
+        "data": "1512687600000", 
+        "nazwa": "Rozmowa kwalifikacyjna",
+        "ikona": "<i class='fa fa-weixin' aria-hidden='true'></i>"
+    },
+    {
+        "data": "1513551600000", 
+        "nazwa": "Pierwszy dzień w pracy...?",
+        "ikona": "<i class='fa fa-handshake-o' aria-hidden='true'></i>"
+    }
+  ]
+}
