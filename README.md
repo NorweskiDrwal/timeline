@@ -1,7 +1,7 @@
 Timeline - extended version
 <br>
 <br>
-The idea is to let the user pick the beggining and ending dates and add and remove events on the fly.
+My idead of making the timeline more interactive was to let the user pick the beggining and ending dates and add and remove events on the fly. The timeline itself does not have to have too much 'bling'. It's what a user can do with it should be the top priority.
 <br>
 That is why I decided to go with the menu, that appears after clicking the "+" icon in the top-right corner.
 <br>
