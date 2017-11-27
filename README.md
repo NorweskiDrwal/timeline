@@ -18,7 +18,7 @@ Only drag and drop functionality is added. User can drag and drop icons, however
 Adding events via form has not yet been added. The data is read from JSON file stored on the server. It is not changeable at the moment. Picking dates of the start and end is also not implemented. I run out of time to get all the above in order. I will work on this idea anyway, to make sure the whole solution is finished, as it is an interesting idea.
 <br>
 <br>
-I will definitely rewrite the app using vue or react. Being able to divide the workload on a modules, that each can be separately edited within its own space would be a better idea.
+I will definitely rewrite the app using vue or react. Being able to divide the workload into modules, where each can be separately edited and styled within its own space would be a better idea.
 <br>
 <br>
 I also will use sass/scss to style the project. I did not use it now, because I thought it would not require that much styling, however, during works, I realized that the styling was, in fact, the biggest part of this project.
